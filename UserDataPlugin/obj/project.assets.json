@@ -1,0 +1,288 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0": {
+      "Net.Extensions/6.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.1/Net.Extensions.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Net.Extensions.dll": {}
+        }
+      },
+      "Net.Json.Serializer/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Net.Proxy": "6.0.0",
+          "Newtonsoft.Json": "13.0.3",
+          "Serialize.Linq": "2.0.0"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Net.Json.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Net.Json.dll": {}
+        }
+      },
+      "Net.Proxy/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Net.Extensions": "6.0.0",
+          "System.Reflection.Emit": "4.7.0"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Net.Proxy.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Net.Proxy.dll": {}
+        }
+      },
+      "Newtonsoft.Json/13.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Serialize.Linq/2.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Serialize.Linq.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Serialize.Linq.dll": {}
+        }
+      },
+      "System.Reflection.Emit/4.7.0": {
+        "type": "package",
+        "compile": {
+          "ref/netcoreapp2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/_._": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Net.Extensions/6.0.0": {
+      "sha512": "Pcj7X8R2hEbCybS+QGDM+kNp+ef9EKcfhAF8660WaHv0K6P69h0KLa3f/kxpScbjb3IhDqQJbONTjmSrTkbUYA==",
+      "type": "package",
+      "path": "net.extensions/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netcoreapp3.1/Net.Extensions.dll",
+        "net.extensions.6.0.0.nupkg.sha512",
+        "net.extensions.nuspec"
+      ]
+    },
+    "Net.Json.Serializer/6.0.0": {
+      "sha512": "7EEGFdbOaFS/R0uXGXsIzm0kPd941I+qMGlkQokaTJN9WrMcjyCT64jqOFlQLJH/G3PLwM7jhCUzpQu6T50qQA==",
+      "type": "package",
+      "path": "net.json.serializer/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netcoreapp3.1/Net.Json.dll",
+        "net.json.serializer.6.0.0.nupkg.sha512",
+        "net.json.serializer.nuspec"
+      ]
+    },
+    "Net.Proxy/6.0.0": {
+      "sha512": "KvjPDWdxf4eYrMpS8z3O1UDIyQ46YB5kESDKSXqwQTwpB4G1CH75o7HIDym+5Km5j2vCCDPaQxx9hitReN3X8A==",
+      "type": "package",
+      "path": "net.proxy/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netcoreapp3.1/Net.Proxy.dll",
+        "net.proxy.6.0.0.nupkg.sha512",
+        "net.proxy.nuspec"
+      ]
+    },
+    "Newtonsoft.Json/13.0.3": {
+      "sha512": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/net6.0/Newtonsoft.Json.dll",
+        "lib/net6.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    },
+    "Serialize.Linq/2.0.0": {
+      "sha512": "mURyXDcdqHvdqlgOKlWWjD210Q83ltASrNB6TTSsSiNPVuxGMghzGc2bt5DzY8T608Bu1NP01lESlaNkpMpcRA==",
+      "type": "package",
+      "path": "serialize.linq/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "lib/net40/Serialize.Linq.dll",
+        "lib/net45/Serialize.Linq.dll",
+        "lib/net5.0/Serialize.Linq.dll",
+        "lib/netstandard1.3/Serialize.Linq.dll",
+        "lib/netstandard2.0/Serialize.Linq.dll",
+        "lib/uap10.0.10240/Serialize.Linq.dll",
+        "serialize.linq.2.0.0.nupkg.sha512",
+        "serialize.linq.nuspec"
+      ]
+    },
+    "System.Reflection.Emit/4.7.0": {
+      "sha512": "VR4kk8XLKebQ4MZuKuIni/7oh+QGFmZW3qORd1GvBq/8026OpW501SzT/oypwiQl4TvT8ErnReh/NzY9u+C6wQ==",
+      "type": "package",
+      "path": "system.reflection.emit/4.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/netcore50/System.Reflection.Emit.dll",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.1/System.Reflection.Emit.dll",
+        "lib/netstandard1.1/System.Reflection.Emit.xml",
+        "lib/netstandard1.3/System.Reflection.Emit.dll",
+        "lib/netstandard2.0/System.Reflection.Emit.dll",
+        "lib/netstandard2.0/System.Reflection.Emit.xml",
+        "lib/netstandard2.1/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard1.1/System.Reflection.Emit.dll",
+        "ref/netstandard1.1/System.Reflection.Emit.xml",
+        "ref/netstandard1.1/de/System.Reflection.Emit.xml",
+        "ref/netstandard1.1/es/System.Reflection.Emit.xml",
+        "ref/netstandard1.1/fr/System.Reflection.Emit.xml",
+        "ref/netstandard1.1/it/System.Reflection.Emit.xml",
+        "ref/netstandard1.1/ja/System.Reflection.Emit.xml",
+        "ref/netstandard1.1/ko/System.Reflection.Emit.xml",
+        "ref/netstandard1.1/ru/System.Reflection.Emit.xml",
+        "ref/netstandard1.1/zh-hans/System.Reflection.Emit.xml",
+        "ref/netstandard1.1/zh-hant/System.Reflection.Emit.xml",
+        "ref/netstandard2.0/System.Reflection.Emit.dll",
+        "ref/netstandard2.0/System.Reflection.Emit.xml",
+        "ref/netstandard2.1/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "runtimes/aot/lib/netcore50/System.Reflection.Emit.dll",
+        "runtimes/aot/lib/netcore50/System.Reflection.Emit.xml",
+        "system.reflection.emit.4.7.0.nupkg.sha512",
+        "system.reflection.emit.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "Net.Json.Serializer >= 6.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\patio\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "G:\\rust_dev\\plugins_dev\\UserDataPlugin\\UserDataPlugin\\UserDataPlugin.csproj",
+      "projectName": "UserDataPlugin",
+      "projectPath": "G:\\rust_dev\\plugins_dev\\UserDataPlugin\\UserDataPlugin\\UserDataPlugin.csproj",
+      "packagesPath": "C:\\Users\\patio\\.nuget\\packages\\",
+      "outputPath": "G:\\rust_dev\\plugins_dev\\UserDataPlugin\\UserDataPlugin\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\patio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net8.0": {
+        "targetAlias": "net8.0",
+        "dependencies": {
+          "Net.Json.Serializer": {
+            "target": "Package",
+            "version": "[6.0.0, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
