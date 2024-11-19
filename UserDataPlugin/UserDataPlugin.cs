@@ -139,13 +139,11 @@ namespace Oxide.Plugins
             );
         }
 
-
-        public void Init()
+        private void Init()
         {
             GetMapPath();
             GetRustItems();
         }
-
 
         private string? GetMapPath()
         {
