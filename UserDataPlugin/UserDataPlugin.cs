@@ -120,10 +120,8 @@ namespace Oxide.Plugins
     {
         private static List<RustItemData> _rustItems = new List<RustItemData>();
 
-        private string? GetRustItems()
+        private void GetRustItems()
         {
-            string? jsonData = null;
-
             const float timeout = 200f;
 
             webrequest.Enqueue(
@@ -132,25 +130,13 @@ namespace Oxide.Plugins
                 (code, response) =>
                 {
                     if (response == null || code != 200) return;
-                    jsonData = response;
+                    _rustItems = JsonConvert.DeserializeObject<List<RustItemData>>(response);
                 },
                 this,
                 RequestMethod.GET,
                 null,
                 timeout
             );
-
-
-            return jsonData;
-        }
-
-        private List<RustItemData> ParseItems()
-        {
-            var jsonData = GetRustItems();
-
-            return jsonData != null
-                ? JsonConvert.DeserializeObject<List<RustItemData>>(jsonData)
-                : new List<RustItemData>();
         }
 
 
@@ -158,8 +144,8 @@ namespace Oxide.Plugins
         {
             GetMapPath();
 
-            _rustItems = ParseItems();
-            
+            GetRustItems();
+
             SendResponse($"rust items parsed: {_rustItems.Count}");
         }
 
