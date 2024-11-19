@@ -168,8 +168,6 @@ namespace Oxide.Plugins
             var files = directoryInfo.GetFiles()
                 .Where(path => path.Name.StartsWith(pattern, StringComparison.OrdinalIgnoreCase)).ToList();
 
-            SendResponse($"files count: {files.Count()}");
-
             if (files.IsEmpty())
             {
                 Server.Command("world.rendermap");
