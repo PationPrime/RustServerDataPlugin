@@ -118,12 +118,50 @@ namespace Oxide.Plugins
     [Info("UserDataPlugin", "Exolidity", "1.0.0")]
     public class UserDataPlugin : RustPlugin
     {
+        private List<RustItemData> _rustItems = new List<RustItemData>();
+
+        private string? GetRustItems()
+        {
+            string? jsonData = null;
+
+            const float timeout = 200f;
+
+            webrequest.Enqueue(
+                "https://raw.githubusercontent.com/PationPrime/RustServerDataPlugin/refs/heads/main/assets/rust_items.json",
+                null,
+                (code, response) =>
+                {
+                    if (response == null || code != 200) return;
+                    jsonData = response;
+                },
+                this,
+                RequestMethod.GET,
+                null,
+                timeout
+            );
+
+
+            return jsonData;
+        }
+
+        private List<RustItemData> ParseItems()
+        {
+            var jsonData = GetRustItems();
+
+            return jsonData != null
+                ? JsonConvert.DeserializeObject<List<RustItemData>>(jsonData)
+                : new List<RustItemData>();
+        }
+
+
         public void Init()
         {
             GetMapPath();
+
+            _rustItems = ParseItems();
         }
 
-        public string? GetMapPath()
+        private string? GetMapPath()
         {
             var pattern = "map";
             var directoryInfo = new DirectoryInfo(System.Environment.CurrentDirectory);
@@ -190,41 +228,6 @@ namespace Oxide.Plugins
             }
         }
 
-        private List<RustItemData> ParseItems()
-        {
-            var jsonData = GetRustItems();
-            return jsonData != null
-                ? JsonConvert.DeserializeObject<List<RustItemData>>(jsonData)
-                : new List<RustItemData>();
-        }
-
-
-        private string? GetRustItems()
-        {
-            string? jsonData = null;
-
-            const float timeout = 200f;
-
-            webrequest.Enqueue(
-                "https://github.com/PationPrime/RustServerDataPlugin/blob/main/assets/rust_items.json",
-                null,
-                (code, response) => { jsonData = GetCallback(code, response); },
-                this,
-                RequestMethod.GET,
-                null,
-                timeout
-            );
-
-
-            return jsonData;
-        }
-
-        private string? GetCallback(int code, string? response)
-        {
-            if (response != null && code == 200) return response;
-            Puts($"GetCallback Error: {code}");
-            return null;
-        }
 
         private static List<Dictionary<string, object?>> AddInventoryItems(
             List<Item>? items,
@@ -259,8 +262,6 @@ namespace Oxide.Plugins
         [ConsoleCommand("inventory.get")]
         protected void GetInventory(ConsoleSystem.Arg arg)
         {
-            var rustItems = ParseItems();
-
             BasePlayer? player = GetPlayerById(arg);
 
             if (player == null)
@@ -275,9 +276,9 @@ namespace Oxide.Plugins
                 var wearContainerItems = playerInventory.GetContainer(PlayerInventory.Type.Wear).itemList;
                 var beltContainerItems = playerInventory.GetContainer(PlayerInventory.Type.Belt).itemList;
 
-                var mainItems = AddInventoryItems(mainContainerItems, rustItems);
-                var beltItems = AddInventoryItems(beltContainerItems, rustItems);
-                var wearItems = AddInventoryItems(wearContainerItems, rustItems);
+                var mainItems = AddInventoryItems(mainContainerItems, _rustItems);
+                var beltItems = AddInventoryItems(beltContainerItems, _rustItems);
+                var wearItems = AddInventoryItems(wearContainerItems, _rustItems);
 
                 var responseData = new Dictionary<string, object>
                 {
