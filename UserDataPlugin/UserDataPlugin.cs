@@ -154,12 +154,13 @@ namespace Oxide.Plugins
         }
 
 
-        public void Init()
+        void Init()
         {
             GetMapPath();
 
             _rustItems = ParseItems();
         }
+
 
         private string? GetMapPath()
         {
