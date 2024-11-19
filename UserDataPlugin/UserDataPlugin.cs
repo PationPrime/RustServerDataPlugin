@@ -140,13 +140,10 @@ namespace Oxide.Plugins
         }
 
 
-        void Init()
+        public void Init()
         {
             GetMapPath();
-
             GetRustItems();
-
-            SendResponse($"rust items parsed: {_rustItems.Count}");
         }
 
 
