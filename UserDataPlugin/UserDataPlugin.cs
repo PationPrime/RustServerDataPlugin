@@ -17,7 +17,6 @@ using Oxide.Core.ServerConsole;
 // ReSharper disable once CheckNamespace
 namespace Oxide.Plugins
 {
-
     public class RustItemData
     {
         [JsonProperty("id")] public string? Id { get; set; }
@@ -92,19 +91,14 @@ namespace Oxide.Plugins
 
     public class MonumentData
     {
+        [JsonProperty("name")] public string? Name { get; }
 
-        [JsonProperty("name")]
-        public string? Name { get; }
-
-        [JsonProperty("type")]
-        public string? Type { get; }
+        [JsonProperty("type")] public string? Type { get; }
 
 
-        [JsonProperty("prefab")]
-        public string? Prefab { get; }
+        [JsonProperty("prefab")] public string? Prefab { get; }
 
-        [JsonProperty("coordinates")]
-        public EntityPositionCoordinates? Coordinates { get; }
+        [JsonProperty("coordinates")] public EntityPositionCoordinates? Coordinates { get; }
 
 
         public MonumentData(
@@ -129,11 +123,12 @@ namespace Oxide.Plugins
             GetMapPath();
         }
 
-        public String? GetMapPath()
+        public string? GetMapPath()
         {
             var pattern = "map";
             var directoryInfo = new DirectoryInfo(System.Environment.CurrentDirectory);
-            var files = directoryInfo.GetFiles().Where(path => path.Name.StartsWith(pattern, StringComparison.OrdinalIgnoreCase)).ToList();
+            var files = directoryInfo.GetFiles()
+                .Where(path => path.Name.StartsWith(pattern, StringComparison.OrdinalIgnoreCase)).ToList();
 
             SendResponse($"files count: {files.Count()}");
 
@@ -197,14 +192,42 @@ namespace Oxide.Plugins
 
         private List<RustItemData> ParseItems()
         {
-            var path = $@"{Directory.GetCurrentDirectory()}\oxide\config\rust_items.json";
-            var jsonData = System.IO.File.ReadAllText(path);
-            var itemsData =
-                JsonConvert.DeserializeObject<List<RustItemData>>(jsonData);
+            GetRustItems();
 
-            return itemsData;
+            // var path = $@"{Directory.GetCurrentDirectory()}\oxide\config\rust_items.json";
+            // var jsonData = System.IO.File.ReadAllText(path);
+            // var itemsData =
+            //     JsonConvert.DeserializeObject<List<RustItemData>>(jsonData);
+
+            return [];
         }
 
+
+        private void GetRustItems()
+        {
+            const float timeout = 200f;
+
+            webrequest.Enqueue(
+                "https://github.com/PationPrime/RustServerDataPlugin/blob/main/assets/rust_items.json",
+                null,
+                GetCallback,
+                this,
+                RequestMethod.GET,
+                null,
+                timeout
+            );
+        }
+
+        private void GetCallback(int code, string? response)
+        {
+            if (response == null || code != 200)
+            {
+                Puts($"GetCallback Error: {code}");
+                return;
+            }
+
+            Puts($"Response {response}");
+        }
 
         private static List<Dictionary<string, object?>> AddInventoryItems(
             List<Item>? items,
@@ -342,9 +365,9 @@ namespace Oxide.Plugins
             catch (Exception)
             {
                 SendResponse(JsonConvert.SerializeObject(new Dictionary<string, object>()
-                {
-                    ["success"] = false
-                }
+                        {
+                            ["success"] = false
+                        }
                     )
                 );
                 throw;
@@ -354,7 +377,6 @@ namespace Oxide.Plugins
         [ConsoleCommand("map.get.png")]
         private void GetServerMap()
         {
-
             var mapPath = GetMapPath();
 
             if (mapPath != null)
@@ -371,7 +393,6 @@ namespace Oxide.Plugins
 
                 SendResponse($"map data: {mapToString}");
             }
-
         }
 
         [ConsoleCommand("player.get.position")]
@@ -456,22 +477,21 @@ namespace Oxide.Plugins
         [ConsoleCommand("world.monuments.get.all")]
         private void GetAllWorldMonuments()
         {
-
             var monuments = new List<MonumentData>();
 
             foreach (var monument in TerrainMeta.Path.Monuments)
             {
                 monuments.Add(
                     new MonumentData(
-                    monument.displayPhrase.english,
-                    monument.Type.ToString(),
-                    monument.name,
-                    new EntityPositionCoordinates(
-                        monument.transform.position.x,
-                        monument.transform.position.y,
-                        monument.transform.position.z
+                        monument.displayPhrase.english,
+                        monument.Type.ToString(),
+                        monument.name,
+                        new EntityPositionCoordinates(
+                            monument.transform.position.x,
+                            monument.transform.position.y,
+                            monument.transform.position.z
+                        )
                     )
-                  )
                 );
             }
 
