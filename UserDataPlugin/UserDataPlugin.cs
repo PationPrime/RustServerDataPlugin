@@ -118,7 +118,7 @@ namespace Oxide.Plugins
     [Info("UserDataPlugin", "Exolidity", "1.0.0")]
     public class UserDataPlugin : RustPlugin
     {
-        private List<RustItemData> _rustItems = new List<RustItemData>();
+        private static List<RustItemData> _rustItems = new List<RustItemData>();
 
         private string? GetRustItems()
         {
@@ -159,6 +159,8 @@ namespace Oxide.Plugins
             GetMapPath();
 
             _rustItems = ParseItems();
+            
+            SendResponse($"rust items parsed: {_rustItems.Count}");
         }
 
 
@@ -229,8 +231,7 @@ namespace Oxide.Plugins
 
 
         private static List<Dictionary<string, object?>> AddInventoryItems(
-            List<Item>? items,
-            List<RustItemData> rustItems
+            List<Item>? items
         )
         {
             var itemsList = new List<Dictionary<string, object?>>();
@@ -239,7 +240,7 @@ namespace Oxide.Plugins
 
             foreach (Item? item in items)
             {
-                var image = rustItems.Find(rustItem => rustItem.Id == item.info.itemid.ToString())?.Image;
+                var image = _rustItems.Find(rustItem => rustItem.Id == item.info.itemid.ToString())?.Image;
 
                 itemsList.Add(
                     new Dictionary<string, object?>()
@@ -275,9 +276,9 @@ namespace Oxide.Plugins
                 var wearContainerItems = playerInventory.GetContainer(PlayerInventory.Type.Wear).itemList;
                 var beltContainerItems = playerInventory.GetContainer(PlayerInventory.Type.Belt).itemList;
 
-                var mainItems = AddInventoryItems(mainContainerItems, _rustItems);
-                var beltItems = AddInventoryItems(beltContainerItems, _rustItems);
-                var wearItems = AddInventoryItems(wearContainerItems, _rustItems);
+                var mainItems = AddInventoryItems(mainContainerItems);
+                var beltItems = AddInventoryItems(beltContainerItems);
+                var wearItems = AddInventoryItems(wearContainerItems);
 
                 var responseData = new Dictionary<string, object>
                 {
