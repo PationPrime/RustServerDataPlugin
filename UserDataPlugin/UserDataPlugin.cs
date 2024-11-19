@@ -192,41 +192,38 @@ namespace Oxide.Plugins
 
         private List<RustItemData> ParseItems()
         {
-            GetRustItems();
-
-            // var path = $@"{Directory.GetCurrentDirectory()}\oxide\config\rust_items.json";
-            // var jsonData = System.IO.File.ReadAllText(path);
-            // var itemsData =
-            //     JsonConvert.DeserializeObject<List<RustItemData>>(jsonData);
-
-            return [];
+            var jsonData = GetRustItems();
+            return jsonData != null
+                ? JsonConvert.DeserializeObject<List<RustItemData>>(jsonData)
+                : new List<RustItemData>();
         }
 
 
-        private void GetRustItems()
+        private string? GetRustItems()
         {
+            string? jsonData = null;
+
             const float timeout = 200f;
 
             webrequest.Enqueue(
                 "https://github.com/PationPrime/RustServerDataPlugin/blob/main/assets/rust_items.json",
                 null,
-                GetCallback,
+                (code, response) => { jsonData = GetCallback(code, response); },
                 this,
                 RequestMethod.GET,
                 null,
                 timeout
             );
+
+
+            return jsonData;
         }
 
-        private void GetCallback(int code, string? response)
+        private string? GetCallback(int code, string? response)
         {
-            if (response == null || code != 200)
-            {
-                Puts($"GetCallback Error: {code}");
-                return;
-            }
-
-            Puts($"Response {response}");
+            if (response != null && code == 200) return response;
+            Puts($"GetCallback Error: {code}");
+            return null;
         }
 
         private static List<Dictionary<string, object?>> AddInventoryItems(
