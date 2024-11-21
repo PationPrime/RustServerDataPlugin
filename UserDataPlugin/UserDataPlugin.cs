@@ -141,24 +141,24 @@ namespace Oxide.Plugins
 
         private void Init()
         {
-            GetMapPath();
+            // GetMapPath();
             GetRustItems();
         }
 
-        private string? GetMapPath()
-        {
-            var pattern = "map";
-            var directoryInfo = new DirectoryInfo(System.Environment.CurrentDirectory);
-            var files = directoryInfo.GetFiles()
-                .Where(path => path.Name.StartsWith(pattern, StringComparison.OrdinalIgnoreCase)).ToList();
-
-            if (files.IsEmpty())
-            {
-                Server.Command("world.rendermap");
-            }
-
-            return files.First().FullName ?? null;
-        }
+        // private string? GetMapPath()
+        // {
+        //     var pattern = "map";
+        //     var directoryInfo = new DirectoryInfo(System.Environment.CurrentDirectory);
+        //     var files = directoryInfo.GetFiles()
+        //         .Where(path => path.Name.StartsWith(pattern, StringComparison.OrdinalIgnoreCase)).ToList();
+        //
+        //     if (files.IsEmpty())
+        //     {
+        //         Server.Command("world.rendermap");
+        //     }
+        //
+        //     return files.First().FullName ?? null;
+        // }
 
         private static void SendResponse(string response)
         {
@@ -356,22 +356,22 @@ namespace Oxide.Plugins
         [ConsoleCommand("map.get.png")]
         private void GetServerMap()
         {
-            var mapPath = GetMapPath();
-
-            if (mapPath != null)
-            {
-                using FileStream fs = File.OpenRead(mapPath);
-
-                using var ms = new MemoryStream(
-                    2048
-                );
-
-                fs.CopyTo(ms);
-
-                var mapToString = Convert.ToBase64String(ms.ToArray());
-
-                SendResponse($"map data: {mapToString}");
-            }
+            // var mapPath = GetMapPath();
+            //
+            // if (mapPath != null)
+            // {
+            //     using FileStream fs = File.OpenRead(mapPath);
+            //
+            //     using var ms = new MemoryStream(
+            //         2048
+            //     );
+            //
+            //     fs.CopyTo(ms);
+            //
+            //     var mapToString = Convert.ToBase64String(ms.ToArray());
+            //
+            //     SendResponse($"map data: {mapToString}");
+            // }
         }
 
         [ConsoleCommand("player.get.position")]
