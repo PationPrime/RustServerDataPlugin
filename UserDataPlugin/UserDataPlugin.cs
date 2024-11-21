@@ -357,22 +357,22 @@ namespace Oxide.Plugins
         [ConsoleCommand("map.get.png")]
         private void GetServerMap()
         {
-            // var mapPath = GetMapPath();
-            //
-            // if (mapPath != null)
-            // {
-            //     using FileStream fs = File.OpenRead(mapPath);
-            //
-            //     using var ms = new MemoryStream(
-            //         2048
-            //     );
-            //
-            //     fs.CopyTo(ms);
-            //
-            //     var mapToString = Convert.ToBase64String(ms.ToArray());
-            //
-            //     SendResponse($"map data: {mapToString}");
-            // }
+            var mapPath = GetMapPath();
+
+            if (mapPath != null)
+            {
+                using FileStream fs = File.OpenRead(mapPath);
+
+                using var ms = new MemoryStream(
+                    2048
+                );
+
+                fs.CopyTo(ms);
+
+                var mapToString = Convert.ToBase64String(ms.ToArray());
+
+                SendResponse($"map data: {mapToString}");
+            }
         }
 
         [ConsoleCommand("player.get.position")]
