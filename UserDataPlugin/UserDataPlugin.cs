@@ -142,23 +142,24 @@ namespace Oxide.Plugins
         private void Init()
         {
             // GetMapPath();
+            Server.Command("world.rendermap");
             GetRustItems();
         }
 
-        // private string? GetMapPath()
-        // {
-        //     var pattern = "map";
-        //     var directoryInfo = new DirectoryInfo(System.Environment.CurrentDirectory);
-        //     var files = directoryInfo.GetFiles()
-        //         .Where(path => path.Name.StartsWith(pattern, StringComparison.OrdinalIgnoreCase)).ToList();
-        //
-        //     if (files.IsEmpty())
-        //     {
-        //         Server.Command("world.rendermap");
-        //     }
-        //
-        //     return files.First().FullName ?? null;
-        // }
+        private string? GetMapPath()
+        {
+            var pattern = "map";
+            var directoryInfo = new DirectoryInfo(System.Environment.CurrentDirectory);
+            var files = directoryInfo.GetFiles()
+                .Where(path => path.Name.StartsWith(pattern, StringComparison.OrdinalIgnoreCase)).ToList();
+
+            if (files.IsEmpty())
+            {
+                Server.Command("world.rendermap");
+            }
+
+            return files.First().FullName ?? null;
+        }
 
         private static void SendResponse(string response)
         {
